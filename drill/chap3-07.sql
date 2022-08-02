@@ -107,11 +107,11 @@ ORDER BY テーブル名, ID
 
 SELECT
   SaleID, ProductID, Quantity, CustomerClassID, CustomerName
-FROM Sales
+FROM Sales s JOIN Customers c ON s.CustomerID = c.CustomerID
 WHERE CustomerClassID = 2 AND Quantity >= 10
 UNION ALL
 SELECT
   SaleID, ProductID, Quantity, CustomerClassID, CustomerName
-FROM Sales
+FROM Sales s JOIN Customers c ON s.CustomerID = c.CustomerID
 WHERE CustomerClassID = 1 AND Quantity >= 100
 ;
