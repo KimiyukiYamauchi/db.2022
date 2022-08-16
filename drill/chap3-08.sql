@@ -89,7 +89,7 @@ ORDER BY
 -- 第5問
 
 SELECT
-  s.ProductID "ProductID"
+  s.ProductID 
 FROM
   Sales s
   JOIN
