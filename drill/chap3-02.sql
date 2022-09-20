@@ -40,6 +40,8 @@ FROM
     JOIN
   Employees
     ON Salary.EmployeeID = Employees.EmployeeID
+ORDER BY
+  Salary.EmployeeID
 ;
 
 -- 第2問
