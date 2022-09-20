@@ -1,6 +1,23 @@
 -- 書いてみよう
 
 SELECT
+  PrefecturalID,
+  (
+    SELECT
+      PrefecturalName
+    FROM
+      Prefecturals p
+    WHERE
+      p.PrefecturalID = c.PrefecturalID
+  ) AS "都道府県名",
+  COUNT(*) AS "顧客数"
+FROM
+  Customers c
+GROUP BY
+  PrefecturalID
+;
+
+SELECT
   Customers.PrefecturalID,
   Prefecturals.PrefecturalName AS "都道府県名",
   COUNT(*) AS "顧客数"
