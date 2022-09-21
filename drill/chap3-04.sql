@@ -1,6 +1,60 @@
 -- 書いてみよう
 
 SELECT
+  P.ProductID, P.ProductName, 
+  AVG(
+    P.Price * S.Quantity
+  ) AS "平均販売価格"
+FROM
+  Products AS P
+    JOIN
+  Sales AS S
+    ON P.ProductID = S.ProductID
+GROUP BY
+  P.ProductID, P.ProductName
+ORDER BY
+  P.ProductID
+;
+
+SELECT
+  P.ProductID, P.ProductName, 
+  AVG(
+    P.Price * S.Quantity
+  ) AS "平均販売価格"
+FROM
+  Products AS P
+    LEFT OUTER JOIN
+  Sales AS S
+    ON P.ProductID = S.ProductID
+GROUP BY
+  P.ProductID, P.ProductName
+ORDER BY
+  P.ProductID
+;
+
+SELECT
+  P.ProductID, P.ProductName, 
+  AVG(
+    P.Price * 
+    CASE
+      WHEN S.Quantity IS NULL THEN 0
+      ELSE S.Quantity
+    END
+  ) AS "平均販売価格"
+FROM
+  Products AS P
+    LEFT OUTER JOIN
+  Sales AS S
+    ON P.ProductID = S.ProductID
+GROUP BY
+  P.ProductID, P.ProductName
+ORDER BY
+  P.ProductID
+;
+
+
+
+SELECT
   p.ProductName,
   AVG(
     p.Price *
@@ -35,7 +89,7 @@ FROM
   Sales AS B
     ON A.CustomerID = B.CustomerID
 GROUP BY
-  A.CustomerID
+  A.CustomerID, A.CustomerName
 ;
 
 
