@@ -1,5 +1,4 @@
 -- 書いてみよう
-
 SELECT
   p.ProductName,
   s1.SaleDate
@@ -26,7 +25,7 @@ ORDER BY p.ProductID, s1.SaleDate DESC
 
 SELECT DISTINCT
   A.ProductID,
-  ProductName,
+  B.ProductName,
   Quantity
 FROM
   Sales AS A
@@ -34,7 +33,7 @@ JOIN
   Products AS B
 ON A.ProductID = B.ProductID
 WHERE
-  Quantity =
+  A.Quantity =
   (
     SELECT
       MAX(Quantity)
@@ -45,6 +44,22 @@ WHERE
   )
 ORDER BY
   A.ProductID
+;
+
+SELECT
+  p.ProductID,
+  p.ProductName, 
+  MAX(s.Quantity) AS Quantity
+FROM
+  Sales s
+JOIN
+  Products p
+  ON
+    s.ProductID = p.ProductID
+GROUP BY
+  p.ProductID, p.ProductName
+ORDER BY
+  p.ProductID
 ;
 
 -- 第2問
