@@ -272,3 +272,36 @@ WHERE
       SUM(Quantity) >= 500
   )
 ;
+
+UPDATE
+  Products p
+SET
+  ProductName =
+
+    concat(
+      (
+        SELECT
+          SUM(Quantity)
+        FROM
+          Sales
+        WHERE
+          ProductID = p.ProductID
+        GROUP BY
+          ProductID
+      ),
+      '個も売れてるヒット商品！',
+      ProductName
+    )
+WHERE
+  ProductID IN
+  (
+    SELECT
+      ProductID
+    FROM
+      Sales
+    GROUP BY
+      ProductID
+    HAVING
+      SUM(Quantity) >= 500
+  )
+;
