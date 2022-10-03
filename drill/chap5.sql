@@ -172,7 +172,24 @@ ORDER BY
 
 -- その5
 
-
+SELECT
+  c.CustomerID,
+  c.CustomerName,
+  p.ProductName,
+  SUM(s.Quantity*p.Price) AS "販売合計金額"
+FROM
+  Customers c
+JOIN
+  Sales s
+ON c.CustomerID = s.CustomerID
+JOIN
+  Products p
+ON s.ProductID = p.ProductID
+GROUP BY
+  c.CustomerID, c.CustomerName, p.ProductName
+ORDER BY
+  c.CustomerID, c.CustomerName, p.ProductName
+;
 
 -- その6
 -- その7
