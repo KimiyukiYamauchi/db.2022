@@ -90,7 +90,7 @@ RIGHT OUTER JOIN
   Employees e
 ON s.EmployeeID = e.EmployeeID
 GROUP BY
-  e.EmployeeID, e.EmployeeName, SUBSTR(SaleDate, 1, 7)
+  e.EmployeeID, e.EmployeeName, 年月
 ;
 
 -- mysql、squatともにOK
@@ -124,11 +124,54 @@ ORDER BY
   e.EmployeeID, e.EmployeeName, x.年月
 ;
 
-
 -- その4
+-- mysqlはOK、squatはNG
+-- mysqlはgroup byで列別名が使える
 
+SELECT
+  s.ProductID,
+  p.ProductName,
+  SUBSTR(s.SaleDate, 1, 7) AS "年月",
+  SUM(s.Quantity * p.Price) AS "販売合計金額"
+FROM
+  Sales s
+JOIN
+  Products p
+ON s.ProductID = p.ProductID
+WHERE
+  p.CategoryID IN (1, 3, 9) 
+GROUP BY
+  s.ProductID, p.ProductName, 年月
+HAVING
+  SUM(s.Quantity*p.Price) > 5000
+ORDER BY
+  s.ProductID, p.ProductName, 年月 DESC
+;
+
+-- mysql、squatともにOK
+
+SELECT
+  s.ProductID,
+  p.ProductName,
+  SUBSTR(s.SaleDate, 1, 7) AS "年月",
+  SUM(s.Quantity * p.Price) AS "販売合計金額"
+FROM
+  Sales s
+JOIN
+  Products p
+ON s.ProductID = p.ProductID
+WHERE
+  p.CategoryID IN (1, 3, 9) 
+GROUP BY
+  s.ProductID, p.ProductName, SUBSTR(s.SaleDate, 1, 7)
+HAVING
+  SUM(s.Quantity*p.Price) > 5000
+ORDER BY
+  s.ProductID, p.ProductName, 年月 DESC
+;
 
 -- その5
+
 
 
 -- その6
