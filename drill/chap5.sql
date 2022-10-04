@@ -197,7 +197,7 @@ SELECT
   c.PrefecturalID,
   pref.PrefecturalName,
   p.ProductName,
-  SUM(p.Price*s.Quantity)
+  SUM(p.Price*s.Quantity) AS "販売合計金額"
 FROM
   Sales s
 JOIN
@@ -211,10 +211,63 @@ JOIN
 ON c.PrefecturalID = pref.PrefecturalID
 GROUP BY
   c.PrefecturalID, p.ProductName, p.ProductName
+ORDER BY
+  c.PrefecturalID, p.ProductName, p.ProductName
 ;
 
-
 -- その7
+
+SELECT
+  b.DepartmentID,
+  d.DepartmentName,
+  SUBSTR(s.PayDate, 1, 7) AS "年月",
+  AVG(s.Amount) AS "平均給与"
+FROM
+  Salary s
+JOIN
+  BelongTo b
+ON s.EmployeeID = b.EmployeeID AND b.EndDate IS NULL
+JOIN
+  Departments d
+ON b.DepartmentID = d.DepartmentID
+WHERE
+  s.PayDate BETWEEN '2007-01-01' AND '2007-12-31'
+GROUP BY
+  b.DepartmentID, d.DepartmentName, SUBSTR(s.PayDate, 1, 7)
+ORDER BY
+  b.DepartmentID, d.DepartmentName, SUBSTR(s.PayDate, 1, 7)
+;
+
+SELECT
+  b.DepartmentID,
+  d.DepartmentName,
+  SUBSTR(s.PayDate, 1, 7) AS "年月",
+  AVG(s.Amount) AS "平均給与"
+FROM
+  Salary s
+JOIN
+  BelongTo b
+ON 
+    s.EmployeeID = b.EmployeeID 
+  AND
+    s.PayDate >= b.StartDate
+  AND
+    s.PayDate <=
+      CASE
+        WHEN b.EndDate IS NULL THEN '9999-12-31'
+        ELSE b.EndDate
+      END
+JOIN
+  Departments d
+ON b.DepartmentID = d.DepartmentID
+WHERE
+  s.PayDate BETWEEN '2007-01-01' AND '2007-12-31'
+GROUP BY
+  b.DepartmentID, d.DepartmentName, SUBSTR(s.PayDate, 1, 7)
+ORDER BY
+  b.DepartmentID, d.DepartmentName, SUBSTR(s.PayDate, 1, 7)
+;
+
 -- その8
 -- その9
 -- その10
