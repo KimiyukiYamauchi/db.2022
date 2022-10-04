@@ -475,5 +475,32 @@ ORDER BY
   ProductID
 ;
 
-
 -- その10
+
+SELECT * FROM Customers;
+
+SELECT
+  concat(
+    CustomerClassID,
+    CASE
+      WHEN PrefecturalID < 10 THEN concat('0', PrefecturalID)
+      ELSE PrefecturalID
+    END, 
+    concat('0', substr(CustomerCode, 2, 3))
+  ) AS "test"
+FROM
+  Customers;
+
+UPDATE
+  Customers
+SET
+  CustomerCode =
+    concat(
+      CustomerClassID,
+      CASE
+        WHEN PrefecturalID < 10 THEN concat('0', PrefecturalID)
+        ELSE PrefecturalID
+      END, 
+      concat('0', substr(CustomerCode, 2, 3))
+    )
+;
