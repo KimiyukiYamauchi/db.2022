@@ -269,5 +269,211 @@ ORDER BY
 ;
 
 -- その8
+
+SELECT
+  SUBSTR(s.SaleDate,1, 7) AS "年月",
+  SUM(
+    CASE
+      WHEN p.CategoryID = 1 THEN p.Price
+      ELSE 0
+    END
+    * s.Quantity
+  ) AS "CT1",
+  SUM(
+    CASE
+      WHEN p.CategoryID = 2 THEN p.Price
+      ELSE 0
+    END
+    * s.Quantity
+  ) AS "CT2",
+  SUM(
+    CASE
+      WHEN p.CategoryID = 3 THEN p.Price
+      ELSE 0
+    END
+    * s.Quantity
+  ) AS "CT3",
+  SUM(
+    CASE
+      WHEN p.CategoryID = 4 THEN p.Price
+      ELSE 0
+    END
+    * s.Quantity
+  ) AS "CT4",
+  SUM(
+    CASE
+      WHEN p.CategoryID = 5 THEN p.Price
+      ELSE 0
+    END
+    * s.Quantity
+  ) AS "CT5",
+  SUM(
+    CASE
+      WHEN p.CategoryID = 6 THEN p.Price
+      ELSE 0
+    END
+    * s.Quantity
+  ) AS "CT6",
+  SUM(
+    CASE
+      WHEN p.CategoryID = 7 THEN p.Price
+      ELSE 0
+    END
+    * s.Quantity
+  ) AS "CT7",
+  SUM(
+    CASE
+      WHEN p.CategoryID = 8 THEN p.Price
+      ELSE 0
+    END
+    * s.Quantity
+  ) AS "CT8",
+  SUM(
+    CASE
+      WHEN p.CategoryID = 9 THEN p.Price
+      ELSE 0
+    END
+    * s.Quantity
+  ) AS "CT9",
+  SUM(
+    CASE
+      WHEN p.CategoryID = 10 THEN p.Price
+      ELSE 0
+    END
+    * s.Quantity
+  ) AS "CT10"
+
+FROM
+  Sales s
+JOIN
+  Products p
+ON
+  s.ProductID = p.ProductID
+GROUP BY
+  SUBSTR(s.SaleDate,1, 7)
+ORDER BY
+  年月
+;
+
 -- その9
+
+-- squatはOK、mysqlはNG
+
+SELECT
+  ProductID,
+  ProductName,
+  "6月販売金額",
+  "7月販売金額",
+  CASE
+    WHEN "7月販売金額" > "6月販売金額" THEN '↑'
+    WHEN "7月販売金額" < "6月販売金額" THEN '↓'
+
+    ELSE '→'
+  END
+  AS "対6月増減",
+  "8月販売金額",
+  CASE
+    WHEN "8月販売金額" > "7月販売金額" THEN '↑'
+    WHEN "8月販売金額" < "7月販売金額" THEN '↓'
+    ELSE '→'
+  END
+  AS "対7月増減"
+FROM
+  (
+    SELECT
+      p.ProductID,
+      p.ProductName,
+      SUM(
+        CASE
+          WHEN s.Quantity IS NULL THEN 0
+          WHEN SUBSTR(s.SaleDate, 1, 7) = '2007-06' THEN s.Quantity
+          ELSE 0
+        END * p.Price
+      ) AS "6月販売金額",
+      SUM(
+        CASE
+          WHEN s.Quantity IS NULL THEN 0
+          WHEN SUBSTR(s.SaleDate, 1, 7) = '2007-07' THEN s.Quantity
+          ELSE 0
+        END * p.Price
+      ) AS "7月販売金額",
+      SUM(
+        CASE
+          WHEN s.Quantity IS NULL THEN 0
+          WHEN SUBSTR(s.SaleDate, 1, 7) = '2007-08' THEN s.Quantity
+          ELSE 0
+        END * p.Price
+
+      ) AS "8月販売金額"
+    FROM
+      Sales s
+    RIGHT OUTER JOIN
+      Products p
+    ON s.ProductID = p.ProductID
+    GROUP BY
+      p.ProductID
+  ) x
+ORDER BY
+  ProductID
+;
+
+-- 解答例を参考に作成したが、mysqlでNG、解答例もNG
+SELECT
+  x.ProductID,
+  x.ProductName,
+  x.A6 AS "6月販売金額",
+  x.A7 AS "7月販売金額",
+  CASE
+    WHEN x.A7 > x.A6 THEN '↑'
+    WHEN x.A7 < x.A6 THEN '↓'
+    ELSE '→'
+  END
+  AS "対6月増減",
+  x.A8 AS "8月販売金額"
+  -- CASE
+  --   WHEN x.A8 > x.A7 THEN '↑'
+  --   WHEN x.A8 < x.A7 THEN '↓'
+  --   ELSE '→'
+  -- END
+  -- AS "対7月増減"
+FROM
+  (
+    SELECT
+      p.ProductID,
+      p.ProductName,
+      SUM(
+        CASE
+          WHEN s.Quantity IS NULL THEN 0
+          WHEN SUBSTR(s.SaleDate, 1, 7) = '2007-06' THEN s.Quantity
+          ELSE 0
+        END * p.Price
+      ) AS "A6",
+      SUM(
+        CASE
+          WHEN s.Quantity IS NULL THEN 0
+          WHEN SUBSTR(s.SaleDate, 1, 7) = '2007-07' THEN s.Quantity
+          ELSE 0
+        END * p.Price
+      ) AS "A7",
+      SUM(
+        CASE
+          WHEN s.Quantity IS NULL THEN 0
+          WHEN SUBSTR(s.SaleDate, 1, 7) = '2007-08' THEN s.Quantity
+          ELSE 0
+        END * p.Price
+
+      ) AS "A8"
+    FROM
+      Sales s
+    RIGHT OUTER JOIN
+      Products p
+    ON s.ProductID = p.ProductID
+    GROUP BY
+      p.ProductID
+  ) x
+ORDER BY
+  ProductID
+;
+
+
 -- その10
