@@ -9,7 +9,7 @@ use drill
 
 -- 問1
 -- テーブルProductsから一度でも売れたことがある商品(テーブルSalesにProductIDがある)でPriceが2000以上の
--- データのProductCode、ProductName、Priceを表示しない
+-- データのProductCode、ProductName、Priceを表示しなさい。
 
 
 +-------------+----------------+-------+
