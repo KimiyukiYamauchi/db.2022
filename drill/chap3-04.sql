@@ -1,3 +1,27 @@
+-- テーブルProductsとSalesを結合し、ProductIDとProductNameでグループ化して
+-- ProductID、ProductName、Quantityの合計(列別名は「数量合計」)
+-- をProductIDの昇順で表示しなさい。
+-- 但し、Salesデータが存在しないQuantityの合計は0を表示しなさい
+
+SELECT
+  p.ProductID, ProductName, 
+  (
+    CASE
+      WHEN SUM(Quantity) IS NULL THEN 0
+      ELSE SUM(Quantity)
+    END
+  ) AS "数量合計"
+  -- SUM(Quantity) AS "数量合計"
+FROM
+  Products p
+LEFT OUTER JOIN
+  Sales s
+ON p.ProductID = s.ProductID
+GROUP BY
+  p.ProductID, ProductName
+;
+
+
 -- 書いてみよう
 
 SELECT
