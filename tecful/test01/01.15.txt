@@ -1,0 +1,24 @@
+"TVタイトル","TVタイトル(日本語)","料金(値上げ)"
+084,"０８４",150
+"A Sin to Err","取り返せない過ち",150
+"A View in the Dark","天文台の夜景",150
+Arkham,"アーカム",150
+"Better Angels","女優の秘密",150
+"Bridge and Tunnel","ミルク・トラックを追え",150
+"Eye Spy","裏切り者を救え",150
+"Life of the Party","パーティの夜",150
+Monsters,"モンスター",150
+"Now is Not the End","キャプテン・アメリカの恋人",100
+Pilot,"シールド精鋭チーム誕生",100
+Pilot,"正義の消えた街",100
+"Selina Kyle","セリーナ・カイル",150
+"Smoke & Mirrors","煙と鏡",150
+Snafu,"催眠博士",150
+"The Asset","グラヴィトニウム",150
+"The Atomic Job","決死の5人組",150
+"The Balloonman","バルーンマン",150
+"The Blitzkrieg Button","ハワードの帰還",150
+"The Iron Ceiling","ベラルーシ行き",150
+"The Lady in the Lake","SSR ロサンゼルス支局",150
+"Time and Tide","執事の過去",150
+Valediction,"ミッドナイト・オイル",150

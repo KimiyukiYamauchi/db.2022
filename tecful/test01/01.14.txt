@@ -1,0 +1,4 @@
+"TVシリーズ名","TVシリーズ名(日本語)"
+GOTHAM,"ゴッサム"
+"Marvel's Agent Carter","エージェント・カーター"
+"Marvel's Agents of S.H.I.E.L.D.","エージェント・オブ・シールド"
