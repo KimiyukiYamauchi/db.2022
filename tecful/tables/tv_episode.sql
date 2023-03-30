@@ -57,12 +57,12 @@ INSERT INTO `tv_episode` (`TV_SERIES_CD`, `TV_SEASON_NUM`, `TV_EPISODE_NUM`, `TV
 
 - TV_SERIES_CD : ＴＶシリーズコード
 - TV_SERIES_NAME : ＴＶシーズンナンバー
-- TV_SERIES_NAME_JP : ＴＶタイトルナンバー
-- TV_SERIES_NAME_JP : ＴＶエピソードコード
-- TV_SERIES_NAME_JP : ＴＶタイトル
-- TV_SERIES_NAME_JP : ＴＶタイトル(日本語)
-- TV_SERIES_NAME_JP : 配信日
-- TV_SERIES_NAME_JP : 料金
+- TV_EPISODE_NUM : ＴＶタイトルナンバー
+- TV_EPISODE_CD : ＴＶエピソードコード
+- TV_EPISODE_TITLE : ＴＶタイトル
+- TV_EPISODE_TITLE_JP : ＴＶタイトル(日本語)
+- TV_EPISODE_LIVEDAY : 配信日
+- TV_EPISODE_CHARGE : 料金
 
 | TV_SERIES_CD | TV_SEASON_NUM | TV_EPISODE_NUM | TV_EPISODE_CD |   TV_EPISODE_TITLE    | TV_EPISODE_TITLE_JP | TV_EPISODE_LIVEDAY | TV_EPISODE_CHARGE |
 |--------------|---------------|----------------|---------------|-----------------------|---------------------|--------------------|-------------------|
